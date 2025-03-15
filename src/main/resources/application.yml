@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: PermTravelServer
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/permtravel
+    username: postgres
+    password: 1
