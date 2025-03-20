@@ -22,7 +22,9 @@ class CConfigDatabase {
                     addPopulators(
                         ResourceDatabasePopulator(
                             ClassPathResource("sql/schema.sql"),
-                            ClassPathResource("sql/data.sql")
+                            // То что ниже добавляет данные в БД при каждом запуске. Раскомментируйте
+                            // только когда запускаете в первый раз, потом опять закомментируйте
+                            // ClassPathResource("sql/data.sql")
                         )
                     )
                 }
