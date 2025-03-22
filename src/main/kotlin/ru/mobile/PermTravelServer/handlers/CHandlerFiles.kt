@@ -12,18 +12,20 @@ import org.springframework.web.reactive.function.server.bodyValueAndAwait
 import ru.mobile.PermTravelServer.services.CServiceMinIO
 
 @Component
-class CHandlerFiles (
+class CHandlerFiles(
     private val minioService: CServiceMinIO
 ) {
     suspend fun getById(request: ServerRequest): ServerResponse {
         val idStr = request.pathVariable("id")
 
-        val pngFilename = "files/$idStr.png"
-        val jpgFilename = "files/$idStr.jpg"
+        val filenames = listOf(
+            "files/$idStr.jpg" to MediaType.IMAGE_JPEG,
+            "files/$idStr.jpeg" to MediaType.IMAGE_JPEG,
+            "files/$idStr.png" to MediaType.IMAGE_PNG
+        )
 
         val (filename, contentType) = withContext(Dispatchers.IO) {
-            listOf(pngFilename to MediaType.IMAGE_PNG, jpgFilename to MediaType.IMAGE_JPEG)
-                .firstOrNull { minioService.getFile(it.first) != null }
+            filenames.firstOrNull { minioService.getFile(it.first) != null }
         } ?: return ServerResponse.status(404).bodyValueAndAwait("Файл не найден")
 
         val fileStream = minioService.getFile(filename) ?: return ServerResponse.status(404).bodyValueAndAwait("Файл не найден")
@@ -35,5 +37,4 @@ class CHandlerFiles (
             .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"$filename\"")
             .bodyValueAndAwait(inputStreamResource)
     }
-
 }
