@@ -1,5 +1,6 @@
 drop table if exists public.places;
 
+
 create table if not exists public.places(
      id UUID PRIMARY KEY,
      name VARCHAR(100) NOT NULL,
