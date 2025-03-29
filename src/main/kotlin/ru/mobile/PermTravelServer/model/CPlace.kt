@@ -5,6 +5,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.util.*
 
+
 @Table("places")
 data class CPlace (
     @Id
@@ -15,5 +16,9 @@ data class CPlace (
     @Column("photoPath")
     var photoPath: String,
     @Column("description")
-    var description: String
+    var description: String,
+    @Column("latitude")
+    var latitude: Double,
+    @Column("longitude")
+    var longitude: Double
 )
