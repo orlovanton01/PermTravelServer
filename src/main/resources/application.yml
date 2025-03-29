@@ -2,12 +2,12 @@ spring:
   application:
     name: PermTravelServer
   r2dbc:
-    url: r2dbc:postgresql://iseletkov.yardtech.ru:50000/permtravel
-    username: permtravel
-    password: PermTravel()
+    url: ${DB_URL:r2dbc:postgresql://iseletkov.yardtech.ru:50000/permtravel}
+    username: ${DB_LOGIN:permtravel}
+    password: ${DB_PASSWORD:PermTravel()}
 
 minio:
-  endpoint: http://iseletkov.yardtech.ru:50101
-  access-key: permtravel
-  secret-key: PermTravel()
-  bucket: permtravel
+  endpoint: ${MINIO_ENDPOINT:http://iseletkov.yardtech.ru:50101}
+  access-key: ${MINIO_LOGIN:permtravel}
+  secret-key: ${MINIO_PASSWORD:PermTravel()}
+  bucket: ${MINIO_BUCKET:permtravel}
