@@ -3,7 +3,6 @@ package ru.mobile.PermTravelServer.model
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
-import java.time.Instant
 import java.util.*
 
 
@@ -12,7 +11,7 @@ data class Posts(
 
     @Id
     @Column("id")
-    var id : UUID = UUID.randomUUID(),
+    var id : UUID,
 
     @Column("authorid")
     var authorId : UUID,
@@ -21,10 +20,10 @@ data class Posts(
     var text : String?,
 
     @Column("createdat")
-    var createdAt: Long = Instant.now().epochSecond,
+    var createdAt: Long,
 
     @Column("placeid")
-    var placeId: UUID?,
+    var placeId: UUID? = null,
 
 
     )

@@ -16,9 +16,11 @@ class ServicePosts (
     suspend fun createPost(request: CreatePostRequest): Posts {
         val newPost =
             Posts(
+                id = request.id,
                 authorId = request.authorId,
                 text = request.text,
-                placeId = request.placeId
+                createdAt = request.createdAt,
+                placeId = request.placeId,
             )
         repository.customInsert(
             id = newPost.id,
@@ -31,8 +33,10 @@ class ServicePosts (
     }
 
     data class CreatePostRequest(
+        val id: UUID,
         val authorId: UUID,
         val text: String?,
+        val createdAt: Long,
         val placeId: UUID? = null
     )
 }

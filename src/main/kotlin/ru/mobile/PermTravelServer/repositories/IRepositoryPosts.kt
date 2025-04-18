@@ -16,9 +16,11 @@ interface IRepositoryPosts: CoroutineCrudRepository<Posts, UUID> {
         INSERT INTO posts (id, authorid, text, createdat, placeid)
         VALUES (:id, :authorId, :text, :createdAt, :placeId)
     """)
-    suspend fun customInsert(id: UUID,
-                             authorId: UUID,
-                             text: String?,
-                             createdAt: Long,
-                             placeId: UUID?)
+    suspend fun customInsert(
+        @Param("id") id : UUID,
+        @Param("authorId") authorId: UUID,
+        @Param("text") text: String?,
+        @Param("createdAt") createdAt: Long,
+        @Param("placeId") placeId: UUID?
+    )
 }
